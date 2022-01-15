@@ -19,9 +19,9 @@ public class ChessMatch {
 	
 	public ChessPiece[][] getPieces(){
 		
-		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumn()];
+		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
 		for(int i =0; i< board.getRows(); i++) {
-			for(int j = 0; j<board.getColumn(); j++) {
+			for(int j = 0; j<board.getColumns(); j++) {
 				mat[i][j] = (ChessPiece)board.piece(i, j);
 			}
 		}
@@ -46,6 +46,9 @@ public class ChessMatch {
 	private void validateSourcePosition(Position position) {
 		if(!board.thereIsAPiece(position)) {
 			throw new ChessException("Não existe peça na posição de origem!");
+		}
+		if(!board.piece(position).isThereAnyPossibleMove()) {
+			throw new ChessException("Não existe movimentos possivel para a peça escolhida");
 		}
 		
 	}
